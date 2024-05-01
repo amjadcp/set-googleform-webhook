@@ -9,7 +9,7 @@ config();
 let forms;
 const authenticateForm = async () => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: "./key.json",
+    keyFile: "./key.json", // service account key that we downloaded from Google Cloud Console
     scopes: [
       "https://www.googleapis.com/auth/forms.responses.readonly",
       "https://www.googleapis.com/auth/forms.body.readonly",
@@ -34,6 +34,8 @@ const addFormToSheet = async (formId, formName) => {
   const data = new FormData();
   data.append("formId", formId);
   data.append("formName", formName);
+  // APP_SCRIPT_URL from the ENV file added in the same folder.
+  // We will get this URL after the deploy the AppScript
   const response = await axios.post(process.env.APP_SCRIPT_URL, data, {
     headers: {
       "Content-Type": "multipart/form-data",

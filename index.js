@@ -11,6 +11,7 @@ app.use(express.json({
     type: ["application/json", "text/plain"]
 }));
 
+// To upload Google Form ID to link to a Google Sheet
 app.post('/api/v1/form', async (req, res) => {
     const { formId } = req.body;
     console.log(formId);
@@ -22,6 +23,7 @@ app.post('/api/v1/form', async (req, res) => {
     });
 });
 
+// Webhook url to get response when a user submit a form. We have to add this in AppScript
 app.post('/api/v1/webhook', async (req, res) => {
     console.log(req.body);
     res.status(200).json({
